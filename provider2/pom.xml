@@ -6,12 +6,12 @@
 		<groupId>com.example.cloud</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.0.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<!-- <relativePath/>  lookup parent from repository -->
 	</parent>
 	<groupId>com.example.cloud</groupId>
-	<artifactId>common</artifactId>
+	<artifactId>provider2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>common</name>
+	<name>provider2</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

@@ -6,7 +6,7 @@
 		<groupId>com.example.cloud</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.0.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<!-- <relativePath/>  lookup parent from repository -->
 	</parent>
 	<groupId>com.example.cloud</groupId>
 	<artifactId>eureka</artifactId>

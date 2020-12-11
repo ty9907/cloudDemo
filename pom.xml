@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<!-- <relativePath/> lookup parent from repository -->
 	</parent>
 	<groupId>com.example.cloud</groupId>
 	<artifactId>parent</artifactId>
@@ -16,7 +16,8 @@
 	<description>Demo project for Spring Boot</description>
 
 	<modules>
-		<module>common</module>
+		<module>provider</module>
+		<module>provider2</module>
 		<module>consumer</module>
 		<module>eureka</module>
 	</modules>
