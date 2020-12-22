@@ -11,13 +11,14 @@ public class HelloController {
 
 
     @RequestMapping("/hello")
-    public String hello(){
-        return "hello.cloud";
+    public String hello() throws InterruptedException {
+        Thread.sleep(2000);
+        return "hello.cloud1111";
     }
 
 
     @RequestMapping(value = "/posthello",method = RequestMethod.POST)
     public String posthello(){
-        return "hello.cloud";
+        return "hello.cloud,provider1";
     }
 }

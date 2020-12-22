@@ -1,5 +1,9 @@
 package com.example.consumer.controller;
 
+import com.example.consumer.hystrix.MyHystrixCommand;
+import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -19,17 +23,31 @@ import java.util.Map;
 public class ConsumerController {
 
     @Autowired
-    private RestOperations restTemplate1;
+    private RestTemplate restTemplate;
 
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @HystrixCommand(fallbackMethod = "error",commandProperties={@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value="1500")})
     @RequestMapping("/consumer")
     public String consumer() {
-        return restTemplate1.getForEntity("http://provider2:9002/hello", String.class).getBody();
+//        int i=1/0;
+        return restTemplate.getForObject("http://provider-a/hello", String.class);
 //        return restTemplate.getForEntity("http://localhost:8080/hello",String.class).getBody();
     }
 
+    @RequestMapping("/hystrix")
+    public String hystrix() {
+        MyHystrixCommand hystrixCommand=new MyHystrixCommand(com.netflix.hystrix.HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("")),
+                restTemplate);
+        String str = hystrixCommand.execute();
+        return str;
+    }
+
+
+    public String  error(Throwable throwable){
+        return "error"+throwable.getMessage();
+    }
 
     @GetMapping("/getInstance")
     public Map<String, List<ServiceInstance>> serviceUrl() {
@@ -45,7 +63,7 @@ public class ConsumerController {
     @RequestMapping("/consumer2")
     @ResponseBody
     public String querybysql2() {
-        return restTemplate1.getForEntity("http://provider2/hello", String.class).getBody();
+        return restTemplate.getForEntity("http://provider2/hello", String.class).getBody();
 
     }
 }

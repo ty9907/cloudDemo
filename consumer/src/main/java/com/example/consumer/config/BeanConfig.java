@@ -16,26 +16,26 @@ import java.net.URI;
 @Configuration
 public class BeanConfig {
 
-    @Bean
-    @LoadBalanced
-    RestOperations restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
+//    @Bean
+//    @LoadBalanced
+//    RestOperations restTemplate(RestTemplateBuilder builder) {
+//        return builder.build();
+//    }
 
 
 
     @Bean
     @LoadBalanced
-    public RestTemplate restTemplate1() {
+    public RestTemplate restTemplate() {
         return new RestTemplate();
      }
-     @Bean
-    public ClientHttpRequestFactory clientHttpRequestFactory(){
-        return new ClientHttpRequestFactory() {
-            @Override
-            public ClientHttpRequest createRequest(URI uri, HttpMethod httpMethod) throws IOException {
-                return null;
-            }
-        };
-    }
+//     @Bean
+//    public ClientHttpRequestFactory clientHttpRequestFactory(){
+//        return new ClientHttpRequestFactory() {
+//            @Override
+//            public ClientHttpRequest createRequest(URI uri, HttpMethod httpMethod) throws IOException {
+//                return null;
+//            }
+//        };
+//    }
 }
